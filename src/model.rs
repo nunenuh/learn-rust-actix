@@ -9,8 +9,8 @@ pub struct Todo {
     pub title: String,
     pub content: String,
     pub completed: Option<bool>,
-    pub createdAt: Option<DateTime<UTC>>,
-    pub updatedAt: Option<DateTime<UTC>>,
+    pub createdAt: Option<DateTime<Utc>>,
+    pub updatedAt: Option<DateTime<Utc>>,
 }
 
 pub struct AppState {

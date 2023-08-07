@@ -4,8 +4,8 @@ use crate::{
 };
 
 use actix_web::{delete, get, patch, post, web, HttpResponse, Responder};
-use chrono::prelude::*;
-use uuid::Uuid;
+// use chrono::prelude::*;
+// use uuid::Uuid;
 
 #[get("/healthchecker")]
 async fn health_checker_handler() -> impl Responder {
@@ -15,9 +15,8 @@ async fn health_checker_handler() -> impl Responder {
         status: "success".to_string(),
         message: MESSAGE.to_string(),
     };
-    HttpResponse.Ok().json(response_json)
+    HttpResponse::Ok().json(response_json)
 }
-
 
 #[get("/todos")]
 pub async fn todos_list_handler (
@@ -37,5 +36,15 @@ pub async fn todos_list_handler (
         todos,
     };
 
-    HttpResponse.Ok().json(json_response);
+    HttpResponse::Ok().json(json_response)
+}
+
+
+
+pub fn config(conf: &mut web::ServiceConfig) {
+    let scope = web::scope("/api")
+        .service(health_checker_handler)
+        .service(todos_list_handler);
+
+    conf.service(scope);
 }
